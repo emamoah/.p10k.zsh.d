@@ -44,22 +44,22 @@ p10k_d_prompt_edit() {
 	case $action in
 	add)
 		if (( $# > 3 )); then
-			eval 'local index_of_last=${'$array'[(i)'$@[-1]']}'
-			eval $array'['$index_of_last']=('$@[3,-2]' '$@[-1]')'
+			local index_of_last=${(P)${array}[(i)${(q)@[-1]}]}
+			: ${(AP)${:-${array}[$index_of_last]}::=${(q)@[3,-1]}}
 		else
-			eval "$array+=$item"
+			: ${(P)${:-${array}[\$#$array+1]}::=${(q)item}}
       		fi
 	;;
 	replace)
 		(( $# < 4 )) && { echo "$0: Too few arguments." >&2; return 1; }
-		eval 'local index=${'$array'[(i)'$3']}'
-		eval 'local arrlen=$#'$array
+		local index=${(P)${array}[(i)${(q)3}]}
+		local arrlen=${(P)#array}
 		(( $index > $arrlen )) && { echo "$0: Item $3 doesn't exist." >&2; return 1; }
-		eval $array'['$index']=('$@[4,-1]')'
+		: ${(AP)${:-${array}[$index]}::=${(q)@[4,-1]}}
 	;;
 	remove)
-		local excl=($@[3,-1])
-		eval $array'=(${'$array':|excl})'
+		local excl=(${(q)@[3,-1]})
+		: ${(AP)array::=${(P)array:|excl}}
 	;;
 	*)
 		echo "$0: Invalid argument: $action" >&2; return 1
