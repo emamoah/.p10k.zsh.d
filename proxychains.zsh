@@ -11,7 +11,7 @@ prompt_proxychains() {
 	[[ -n $PROXYCHAINS_CONF_FILE ]] && {
 		local CHAIN=(${${${(M)${(Af)"$(<$PROXYCHAINS_CONF_FILE)"}:#[[:space:]]#(socks[45]|http|raw)*}##[[:space:]]#}%%[[:space:]]#})
 
-		if [[ 0 -lt ${#${(M)CHAIN:#socks[45][[:space:]]##${TOR_HOST}[[:space:]]##${TOR_PORT}}} ]]; then
+		if (( ${(M)#CHAIN:#socks[45][[:space:]]##${TOR_HOST}[[:space:]]##${TOR_PORT}} )); then
 			local STATE=TOR
 			local ICON=''
 			local FOREGROUND=129
@@ -26,3 +26,4 @@ prompt_proxychains() {
 		p10k segment -s $STATE -f "$FOREGROUND" -i "$ICON" -t "$TEXT"
 	}
 }
+
