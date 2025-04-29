@@ -2,7 +2,7 @@
 
 This branch hosts modules for custom prompt segments to be used with **.p10k.zsh.d**. See the [main branch](https://github.com/emamoah/.p10k.zsh.d/tree/main) for details.
 
-Each module is contained in a `.zsh` file. You can copy any of those to your `~/.p10k.zsh.d` directory and add them to your prompt with the `p10k_d_*` commands, as documented in the [main README](https://github.com/emamoah/.p10k.zsh.d/blob/main/README.md#usage).
+Each module is contained in a `.zsh` file. You can copy any of those to your `~/.p10k.zsh.d` directory and add them to your prompt with the `p10k_d_*` commands, as documented in the [main README](https://github.com/emamoah/.p10k.zsh.d/blob/main/README.md#usage). The "Quick install" sections under each module below provide a quick way to download the module file to your `~/.p10k.zsh.d` directory with one command.
 
 All modules added to the library will be documented below. Pull requests are welcome for new modules.
 
@@ -17,7 +17,6 @@ Each documented module defines some metadata, namely:
 
   <dt>Segment</dt>
   <dd>Prompt segment identifier, used in the <code>p10k_d_*</code> commands</dd>
-
 </dl>
 
 ## Modules
@@ -54,3 +53,9 @@ typeset -g POWERLEVEL9K_PROXYCHAINS_NOTOR_FOREGROUND='green'
 ```
 
 </details>
+
+#### Quick install
+
+```shell
+curl -sSLO --output-dir ~/.p10k.zsh.d https://github.com/emamoah/.p10k.zsh.d/raw/refs/heads/modules/proxychains.zsh
+```
