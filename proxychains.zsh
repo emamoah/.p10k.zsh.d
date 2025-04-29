@@ -9,20 +9,18 @@ prompt_proxychains() {
 	local TOR_PORT=9050
 
 	[[ -n $PROXYCHAINS_CONF_FILE ]] && {
-		local CHAIN=$(grep -E '^\s*(socks[45]|http|raw)' $PROXYCHAINS_CONF_FILE)
+		local CHAIN=(${${${(M)${(Af)"$(<$PROXYCHAINS_CONF_FILE)"}:#[[:space:]]#(socks[45]|http|raw)*}##[[:space:]]#}%%[[:space:]]#})
 
-		if grep -qE "^socks[45]\\s+$TOR_HOST\\s+$TOR_PORT" <<< $CHAIN; then
+		if [[ 0 -lt ${#${(M)CHAIN:#socks[45][[:space:]]##${TOR_HOST}[[:space:]]##${TOR_PORT}}} ]]; then
 			local STATE=TOR
 			local ICON=''
 			local FOREGROUND=129
 			local TEXT=Tor
 		else
-			local CHAINLEN=$(grep -c '.' <<< $CHAIN)
-
 			local STATE=NOTOR
 			local ICON=''
 			local FOREGROUND=255
-			local TEXT=$CHAINLEN
+			local TEXT=$#CHAIN
 		fi
 
 		p10k segment -s $STATE -f "$FOREGROUND" -i "$ICON" -t "$TEXT"
