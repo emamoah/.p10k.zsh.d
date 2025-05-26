@@ -134,3 +134,4 @@ And now you have a clean, modularised p10k configuration!
 ## Bonus
 
 This repo has a [modules branch](https://github.com/emamoah/.p10k.zsh.d/tree/modules) which will exist as a library for custom modules written by me and other contributors (like you). So feel free to browse those, and more will be added with time.
+
